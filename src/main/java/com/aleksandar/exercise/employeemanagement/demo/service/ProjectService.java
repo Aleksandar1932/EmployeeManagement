@@ -24,4 +24,6 @@ public interface ProjectService {
     Optional<Project> assignWorkerOnProject(Long projectId, String username);
 
     Optional<Project> unAssignWorkerOnProject(Long projectId, String username);
+
+    Boolean isWorkerAssignedOnProject(Long projectId, String username);
 }

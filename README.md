@@ -18,10 +18,8 @@ The basic requirements are the following:
 
 - `Managers` create Tasks
 
-- `Workers` can complete Tasks
+- `Workers` complete Tasks
 
 - `Managers` can edit `Workers` details
 
-- `Managers` have dashboard 
-
-- `Workers` complete tasks.
+- `Managers` have dashboard

@@ -77,4 +77,12 @@ public class ProjectServiceImpl implements ProjectService {
         project.getWorkers().remove(worker);
         return Optional.of(this.projectRepository.save(project));
     }
+
+    @Override
+    public Boolean isWorkerAssignedOnProject(Long projectId, String username) {
+        Project project = this.projectRepository.findById(projectId).orElseThrow(() -> new ProjectWithIdDoesNotExistException(projectId));
+        User worker = userRepository.findByUsername(username).orElseThrow(() -> new UserWithUsernameDoesNotExistException(username));
+
+        return project.getWorkers().contains(worker);
+    }
 }

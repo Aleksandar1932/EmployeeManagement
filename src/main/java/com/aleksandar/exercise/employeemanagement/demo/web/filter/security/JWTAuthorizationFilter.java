@@ -1,4 +1,4 @@
-package com.aleksandar.exercise.employeemanagement.demo.web.filter;
+package com.aleksandar.exercise.employeemanagement.demo.web.filter.security;
 
 import com.aleksandar.exercise.employeemanagement.demo.model.enumerations.Role;
 import com.auth0.jwt.JWT;
@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.aleksandar.exercise.employeemanagement.demo.config.SecurityConstants.*;
@@ -45,14 +44,11 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
 
         if (token != null) {
-            // parse the token.
             DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                     .build()
                     .verify(token.replace(TOKEN_PREFIX, ""));
 
-
             String user = decodedJWT.getSubject();
-
             List<Role> grantedAuthorities = decodedJWT.getClaim("grantedAuthorities").asList(Role.class);
 
             if (user != null) {

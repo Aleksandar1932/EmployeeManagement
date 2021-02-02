@@ -1,8 +1,8 @@
 package com.aleksandar.exercise.employeemanagement.demo.config;
 
 import com.aleksandar.exercise.employeemanagement.demo.service.UserService;
-import com.aleksandar.exercise.employeemanagement.demo.web.filter.JWTAuthenticationFilter;
-import com.aleksandar.exercise.employeemanagement.demo.web.filter.JWTAuthorizationFilter;
+import com.aleksandar.exercise.employeemanagement.demo.web.filter.security.JWTAuthenticationFilter;
+import com.aleksandar.exercise.employeemanagement.demo.web.filter.security.JWTAuthorizationFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

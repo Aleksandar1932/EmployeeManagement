@@ -1,6 +1,5 @@
 package com.aleksandar.exercise.employeemanagement.demo.web.controller.rest;
 
-import com.aleksandar.exercise.employeemanagement.demo.model.User;
 import com.aleksandar.exercise.employeemanagement.demo.model.dto.UserDto;
 import com.aleksandar.exercise.employeemanagement.demo.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;

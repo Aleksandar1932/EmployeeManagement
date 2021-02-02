@@ -1,7 +1,6 @@
-package com.aleksandar.exercise.employeemanagement.demo.web.filter;
+package com.aleksandar.exercise.employeemanagement.demo.web.filter.security;
 
 import com.aleksandar.exercise.employeemanagement.demo.model.User;
-import com.aleksandar.exercise.employeemanagement.demo.model.enumerations.Role;
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +10,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

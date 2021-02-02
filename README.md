@@ -1,0 +1,25 @@
+# Employee Management
+
+The main goal of this project is to build Spring Boot + React application and to try Json WebToken based authentication (JWT).
+
+An essential guide for achieving JWT is available on the following [link](https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/).
+
+## Requirements
+
+There are two roles (`Manager` and `Worker`).
+
+The basic requirements are the following:
+
+- `Managers` create Projects
+
+- `Workers` work on Projects
+
+- `Managers` create Tasks
+
+- `Workers` work on Tasks
+
+- `Managers` can edit `Workers` details
+
+- `Managers` have dashboard 
+
+- `Workers` complete tasks.

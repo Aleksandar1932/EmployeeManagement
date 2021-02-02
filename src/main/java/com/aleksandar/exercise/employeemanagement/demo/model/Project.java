@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,6 +28,9 @@ public class Project {
     private ProjectCategory category;
 
     private Double budget;
+
+    @ManyToMany
+    private List<User> workers;
 
     public Project(String name, String description, String location, User manager, ProjectCategory category, Double budget) {
         this.name = name;

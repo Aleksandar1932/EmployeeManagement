@@ -12,11 +12,13 @@ The basic requirements are the following:
 
 - `Managers` create Projects
 
-- `Workers` work on Projects
+- `Managers` assign workers on Projects
+
+- `Managers` un-assign workers on Projects
 
 - `Managers` create Tasks
 
-- `Workers` work on Tasks
+- `Workers` can complete Tasks
 
 - `Managers` can edit `Workers` details
 

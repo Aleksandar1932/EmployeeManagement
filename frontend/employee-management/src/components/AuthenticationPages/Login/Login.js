@@ -3,7 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import AuthService from '../../../services/auth.service'
+import AuthService from '../../../services/authentication/auth.service'
 
 const required = (value) => {
     if (!value) {
@@ -47,7 +47,7 @@ const Login = (props) => {
             AuthService.login(username, password)
                 .then(
                 () => {
-                    props.history.push("/profile");
+                    props.history.push("/");
                     window.location.reload();
                 },
                 (error) => {

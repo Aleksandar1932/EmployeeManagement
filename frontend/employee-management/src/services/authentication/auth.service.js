@@ -1,7 +1,9 @@
-import axios from "../custom-axios/axios";
+import axios from "../../custom-axios/axios";
+import BACKEND_APP_URL from "../../constants/constants";
 
-const API_URL = "http://localhost:9090/api/users/";
-const API_LOGIN_URL = "http://localhost:9090/login";
+const API_URL = BACKEND_APP_URL + "users/";
+const API_LOGIN_URL = BACKEND_APP_URL + "login";
+
 
 const register = (username, password, repeatPassword, role) => {
     return axios.post(API_URL + 'register', {
@@ -20,7 +22,11 @@ const login = (username, password) => {
         })
         .then((response) => {
             console.log("Axios response")
-            console.log(response.headers)
+            console.log()
+
+            localStorage.setItem("authorization", JSON.stringify(response.headers.authorization))
+
+
         });
 }
 

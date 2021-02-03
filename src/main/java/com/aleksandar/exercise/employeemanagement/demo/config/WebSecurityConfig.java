@@ -30,7 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
+        http.cors().and()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/login").permitAll()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers("/api/projects/**").hasRole("MANAGER")
                 .anyRequest().authenticated()
@@ -38,10 +41,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(this.userService).passwordEncoder(passwordEncoder);
     }
+
 }

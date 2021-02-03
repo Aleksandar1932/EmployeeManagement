@@ -1,14 +1,14 @@
 package com.aleksandar.exercise.employeemanagement.demo.web.controller.rest;
 
+import com.aleksandar.exercise.employeemanagement.demo.model.User;
 import com.aleksandar.exercise.employeemanagement.demo.model.dto.UserDto;
 import com.aleksandar.exercise.employeemanagement.demo.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     private final UserService userService;
 
@@ -17,7 +17,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody UserDto user) {
-        this.userService.register(user);
+    public ResponseEntity<User> register(@RequestBody UserDto user) {
+        User createdUser =   this.userService.register(user);
+        return ResponseEntity.ok(createdUser);
     }
 }

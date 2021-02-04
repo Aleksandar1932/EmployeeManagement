@@ -1,3 +1,3 @@
-const BACKEND_APP_URL = "http://localhost:9090/api/"
+const BACKEND_APP_BASE_URL = "http://localhost:9090/"
 
-export default BACKEND_APP_URL
+export  default BACKEND_APP_BASE_URL

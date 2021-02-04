@@ -6,7 +6,8 @@ const instance = axios.create({
     headers: {
         'Access-Control-Allow-Origin': 'http://localhost:3000',
         'Access-Control-Allow-Headers': 'Authorization',
-        'Authorization': authHeader().Authorization,
+        ...(authHeader().Authorization !== undefined) && {'Authorization': authHeader().Authorization},
+
     }
 })
 

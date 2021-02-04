@@ -1,8 +1,9 @@
 import axios from "../../custom-axios/axios";
 import BACKEND_APP_URL from "../../constants/constants";
+import BACKEND_APP_BASE_URL from "../../constants/constants";
 
-const API_URL = BACKEND_APP_URL + "users/";
-const API_LOGIN_URL = BACKEND_APP_URL + "login";
+const API_URL = BACKEND_APP_BASE_URL + 'api/users/';
+const API_LOGIN_URL = BACKEND_APP_URL + 'login'
 
 
 const register = (username, password, repeatPassword, role) => {
@@ -22,7 +23,7 @@ const login = (username, password) => {
         })
         .then((response) => {
             console.log("Axios response")
-            console.log()
+            console.log(response.headers.authorization)
 
             localStorage.setItem("authorization", JSON.stringify(response.headers.authorization))
 
@@ -31,11 +32,11 @@ const login = (username, password) => {
 }
 
 const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("authorization");
 };
 
 const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("user"));
+    return JSON.parse(localStorage.getItem("authorization"));
 };
 
 export default {

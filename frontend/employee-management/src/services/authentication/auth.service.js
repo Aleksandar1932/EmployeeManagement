@@ -22,8 +22,8 @@ const login = (username, password) => {
             "password": password
         })
         .then((response) => {
-            console.log("Axios response")
-            console.log(response.headers.authorization)
+            // console.log("Axios response")
+            // console.log(response.headers.authorization)
 
             localStorage.setItem("authorization", JSON.stringify(response.headers.authorization))
 

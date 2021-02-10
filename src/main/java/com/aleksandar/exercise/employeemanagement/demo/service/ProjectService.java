@@ -26,4 +26,6 @@ public interface ProjectService {
     Optional<Project> unAssignWorkerOnProject(Long projectId, String username);
 
     Boolean isWorkerAssignedOnProject(Long projectId, String username);
+
+    void deleteById(Long id);
 }

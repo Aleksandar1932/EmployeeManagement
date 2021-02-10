@@ -85,4 +85,9 @@ public class ProjectServiceImpl implements ProjectService {
 
         return project.getWorkers().contains(worker);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        this.projectRepository.deleteById(id);
+    }
 }

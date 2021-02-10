@@ -28,6 +28,8 @@ const ProjectsList = (props) => {
         )
     }
 
+
+
     return projects.length !== 0 ? (
         <div className={"container mm-4 mt-5"}>
             <h3>All Projects</h3>
@@ -42,6 +44,7 @@ const ProjectsList = (props) => {
                         <th scope={"col"}>Category</th>
                         <th scope={"col"}>Budget</th>
                         <th scope={"col"}>Workers</th>
+                        <th scope={"col"}>Actions</th>
                         </thead>
 
                         <tbody>
@@ -59,7 +62,9 @@ const ProjectsList = (props) => {
                 <div className="col mb-3">
                     <div className="row">
                         <div className="col-sm-12 col-md-12">
-                            {/*<Link className={"btn btn-block btn-dark"} to={"/products/add"}>Add new product</Link>*/}
+                            {
+                                <a href={"#"} className={"btn btn-primary btn-block"}>Add New</a>
+                                /*<Link className={"btn btn-block btn-dark"} to={"/products/add"}>Add new product</Link>*/}
                         </div>
                     </div>
                 </div>

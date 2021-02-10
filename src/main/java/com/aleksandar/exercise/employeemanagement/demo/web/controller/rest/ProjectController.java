@@ -41,4 +41,11 @@ public class ProjectController {
         return this.projectService.unAssignWorkerOnProject(projectId, username).map(project -> ResponseEntity.ok().body(project))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteById(@PathVariable Long id) {
+        this.projectService.deleteById(id);
+        if(this.projectService.findById(id).isEmpty()) return ResponseEntity.ok().build();
+        return ResponseEntity.badRequest().build();
+    }
 }

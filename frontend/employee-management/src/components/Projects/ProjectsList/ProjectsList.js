@@ -63,7 +63,7 @@ const ProjectsList = (props) => {
                     <div className="row">
                         <div className="col-sm-12 col-md-12">
                             {
-                                <a href={"#"} className={"btn btn-primary btn-block"}>Add New</a>
+                                <a href={"/projects/add"} className={"btn btn-primary btn-block"}>Add New</a>
                                 /*<Link className={"btn btn-block btn-dark"} to={"/products/add"}>Add new product</Link>*/}
                         </div>
                     </div>

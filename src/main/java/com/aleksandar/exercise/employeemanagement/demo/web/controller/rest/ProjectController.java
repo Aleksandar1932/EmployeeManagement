@@ -2,11 +2,14 @@ package com.aleksandar.exercise.employeemanagement.demo.web.controller.rest;
 
 import com.aleksandar.exercise.employeemanagement.demo.model.Project;
 import com.aleksandar.exercise.employeemanagement.demo.model.dto.ProjectDto;
+import com.aleksandar.exercise.employeemanagement.demo.model.enumerations.ProjectCategory;
 import com.aleksandar.exercise.employeemanagement.demo.service.ProjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/projects")
@@ -45,7 +48,14 @@ public class ProjectController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteById(@PathVariable Long id) {
         this.projectService.deleteById(id);
-        if(this.projectService.findById(id).isEmpty()) return ResponseEntity.ok().build();
+        if (this.projectService.findById(id).isEmpty()) return ResponseEntity.ok().build();
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/categories")
+    public List<String> findAllCategories() {
+        return Arrays.stream(ProjectCategory.values())
+                .map(Enum::toString)
+                .collect(Collectors.toList());
     }
 }

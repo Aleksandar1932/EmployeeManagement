@@ -24,13 +24,23 @@ const addProject = (name, description, location, managerUsername, category, budg
     })
 }
 
+const assignWorker = (projectId, workerUsername) => {
+    return axios.get(PROJECTS_URL + /assign/ + projectId + "/" + workerUsername)
+}
+
 const unAssignWorker = (projectId, workerUsername) => {
     return axios.get(PROJECTS_URL + /un-assign/ + projectId + "/" + workerUsername)
+}
+
+const getProjectCategories = () => {
+    return axios.get(PROJECTS_URL + "/categories")
 }
 
 export default {
     getProjects,
     deleteProjectById,
     addProject,
-    unAssignWorker
+    unAssignWorker,
+    getProjectCategories,
+    assignWorker
 }

@@ -35,7 +35,9 @@ const ProjectAdd = (props) => {
 
     return (
         <div className="row mt-5">
+
             <div className="col-md-5">
+                <h1>Add New Project</h1>
                 <form onSubmit={onFormSubmit}>
 
                     <div className="form-group">

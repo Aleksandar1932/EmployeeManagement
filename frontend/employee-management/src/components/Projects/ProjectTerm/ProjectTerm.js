@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectsService from "../../../services/projects/projects.service";
 import {Button, Modal} from "react-bootstrap";
+import AssignWorker from "./AssignWorker/AssignWorker";
 
 
 const ProjectTerm = (props) => {
@@ -40,7 +41,7 @@ const ProjectTerm = (props) => {
                         :
                         <ul>
                             {props.term.workers.map((term) =>
-                                <li>{term.username} <i>({term.role})</i>
+                                <li>{term.username} <i>({term.role.replace("ROLE_","")})</i>
                                     <Button className={"ml-2 btn-sm"} variant="danger" onClick={() => {
                                         handleUnAssignWorker(term.username)
                                     }}>
@@ -51,12 +52,16 @@ const ProjectTerm = (props) => {
                         </ul>}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className={"btn-sm btn-block"} variant="info">
-                        Assign New
-                    </Button>
-                    <Button className={"btn-block btn-sm"} variant="secondary" onClick={closeModal}>
-                        Close
-                    </Button>
+                    <div className={"col-lg-12"}>
+                        <AssignWorker projectId={props.term.id}/>
+                    </div>
+                    <div className={"col-lg-12"}>
+                        <Button className={"btn-block btn-sm"} variant="secondary" onClick={closeModal}>
+                            Close
+                        </Button>
+                    </div>
+
+
                 </Modal.Footer>
             </Modal>
 

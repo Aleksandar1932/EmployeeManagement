@@ -13,14 +13,14 @@ const ProjectsList = (props) => {
 
     const loadProjects = () => {
         ProjectsService.getProjects().then((response) => {
-            if (response.status === 403){
+            if (response.status === 403) {
                 setForbidden(true)
             }
             setProjects(response.data);
         })
     }
 
-    if (forbidden){
+    if (forbidden) {
         return (
             <div className="alert alert-danger" role="alert">
                 Access not allowed!
@@ -29,12 +29,12 @@ const ProjectsList = (props) => {
     }
 
 
-
     return projects.length !== 0 ? (
         <div className={"container mm-4 mt-5"}>
             <h3>All Projects</h3>
             <div className={"row"}>
                 <div className={"table-responsive"}>
+                    <div className="col-sm-12 col-md-12">
                     <table className={"table table-striped"}>
                         <thead>
                         <th scope={"col"}>Name</th>
@@ -58,16 +58,16 @@ const ProjectsList = (props) => {
 
 
                     </table>
-                </div>
-                <div className="col mb-3">
-                    <div className="row">
-                        <div className="col-sm-12 col-md-12">
-                            {
-                                <a href={"/projects/add"} className={"btn btn-primary btn-block"}>Add New</a>
-                                /*<Link className={"btn btn-block btn-dark"} to={"/products/add"}>Add new product</Link>*/}
-                        </div>
                     </div>
                 </div>
+
+
+                <div className="col-sm-12 col-md-12">
+                    {
+                        <a href={"/projects/add"} className={"btn btn-outline-primary btn-block"}>Add New</a>
+                        /*<Link className={"btn btn-block btn-dark"} to={"/products/add"}>Add new product</Link>*/}
+                </div>
+
 
             </div>
         </div>

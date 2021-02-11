@@ -39,9 +39,14 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("authorization"));
 };
 
+const getAvailableRoles = () => {
+    return axios.get(BACKEND_APP_BASE_URL + 'api/roles');
+}
+
 export default {
     register,
     login,
     logout,
     getCurrentUser,
+    getAvailableRoles
 };

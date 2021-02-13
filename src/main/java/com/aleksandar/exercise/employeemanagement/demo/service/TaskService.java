@@ -14,4 +14,6 @@ public interface TaskService {
     Optional<Task> completeTask(Long taskId, String username);
 
     List<Task> findAllByProject(Long projectId);
+
+    List<Task> findAllByAssignedWorkerUsername(String username);
 }

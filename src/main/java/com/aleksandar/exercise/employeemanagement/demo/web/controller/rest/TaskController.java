@@ -28,11 +28,23 @@ public class TaskController {
     }
 
     @GetMapping("/all")
-    public List<Task> findAll(@RequestParam(required = false) Long projectId) {
-        if (projectId == null) {
+    public List<Task> findAll(
+            @RequestParam(required = false) Long projectId,
+            @RequestParam(required = false) String username
+
+            ) {
+        if (projectId != null && username == null) {
+            return this.taskService.findAllByProject(projectId);
+        }
+        else if (projectId == null && username != null) {
+            return this.taskService.findAllByAssignedWorkerUsername(username);
+        }
+        else{
             return this.taskService.findAll();
         }
-        return this.taskService.findAllByProject(projectId);
+
+
+
     }
 
     @PostMapping("/add")

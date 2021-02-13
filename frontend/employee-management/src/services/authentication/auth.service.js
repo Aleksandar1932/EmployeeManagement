@@ -26,6 +26,7 @@ const login = (username, password) => {
             // console.log(response.headers.authorization)
 
             localStorage.setItem("authorization", JSON.stringify(response.headers.authorization))
+            localStorage.setItem("user", JSON.stringify(response.data))
 
 
         });
@@ -33,14 +34,25 @@ const login = (username, password) => {
 
 const logout = () => {
     localStorage.removeItem("authorization");
+    localStorage.removeItem("user");
 };
 
 const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("authorization"));
+    return JSON.parse(localStorage.getItem("user"));
 };
 
 const getAvailableRoles = () => {
     return axios.get(BACKEND_APP_BASE_URL + 'api/roles');
+}
+
+const isCurrentUserManager = () => {
+    // if(this.getCurrentUser()["role"].includes("MANAGER") === true){
+    //     return true
+    // }
+    // else{
+    //     return false
+    // }
+    return getCurrentUser()["role"].includes("MANAGER");
 }
 
 export default {
@@ -48,5 +60,6 @@ export default {
     login,
     logout,
     getCurrentUser,
-    getAvailableRoles
+    getAvailableRoles,
+    isCurrentUserManager
 };

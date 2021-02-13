@@ -2,6 +2,7 @@ package com.aleksandar.exercise.employeemanagement.demo.web.filter.security;
 
 import com.aleksandar.exercise.employeemanagement.demo.model.User;
 import com.auth0.jwt.JWT;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -62,5 +63,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .sign(HMAC512(SECRET.getBytes()));
 
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        response.getWriter().println(userToJSON(user));
+    }
+
+    private String userToJSON(User u) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(u);
     }
 }

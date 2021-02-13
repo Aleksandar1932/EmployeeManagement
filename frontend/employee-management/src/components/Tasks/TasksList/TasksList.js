@@ -1,29 +1,36 @@
-import ProjectTerm from "../ProjectTerm/ProjectTerm";
 import React, {useEffect, useState} from "react";
-import ProjectsService from "../../../services/projects/projects.service";
+import TasksService from "../../../services/tasks/tasks.service";
 import AuthService from "../../../services/authentication/auth.service";
+import TaskTerm from "../TaskTerm/TaskTerm";
 
 
-const ProjectsList = (props) => {
+const TasksList = (props) => {
 
-    const [projects, setProjects] = useState([])
+    const [tasks, setTasks] = useState([])
     const [forbidden, setForbidden] = useState(false)
     useEffect(() => {
-        loadProjects();
+        loadTasks();
     }, []);
 
 
-    const loadProjects = () => {
+    const loadTasks = () => {
         if (AuthService.isCurrentUserManager() === true) {
-            ProjectsService.getProjects().then((response) => {
+            TasksService.getTasks().then((response) => {
                 if (response.status === 403) {
                     setForbidden(true)
                 }
-                setProjects(response.data);
+                setTasks(response.data);
             })
         } else {
-            setForbidden(true);
+            TasksService.getTasks(AuthService.getCurrentUser()["username"]).then((response) => {
+                if (response.status === 403) {
+                    setForbidden(true)
+                }
+                setTasks(response.data);
+            })
+            // setForbidden(true)
         }
+
     }
 
     if (forbidden) {
@@ -35,28 +42,25 @@ const ProjectsList = (props) => {
     } else {
 
 
-        return projects.length !== 0 ? (
+        return tasks.length !== 0 ? (
             <div className={"container mm-4 mt-5"}>
-                <h3>All Projects</h3>
+                <h3>All Tasks</h3>
                 <div className={"row"}>
                     <div className={"table-responsive"}>
                         <div className="col-sm-12 col-md-12">
                             <table className={"table table-striped"}>
                                 <thead>
-                                <th scope={"col"}>Name</th>
                                 <th scope={"col"}>Description</th>
-                                <th scope={"col"}>Location</th>
-                                <th scope={"col"}>Manager</th>
-                                <th scope={"col"}>Category</th>
-                                <th scope={"col"}>Budget</th>
-                                <th scope={"col"}>Workers</th>
+                                <th scope={"col"}>Project Name</th>
+                                <th scope={"col"}>Created</th>
+                                <th scope={"col"}>Completed</th>
                                 <th scope={"col"}>Actions</th>
                                 </thead>
 
                                 <tbody>
-                                {projects.map((term) => {
+                                {tasks.map((term) => {
                                     return (
-                                        <ProjectTerm term={term}/>
+                                        <TaskTerm term={term}/>
                                     );
                                 })}
 
@@ -67,7 +71,7 @@ const ProjectsList = (props) => {
                         </div>
                     </div>
 
-                    {AuthService.isCurrentUserManager() === true &&
+                    {AuthService.getCurrentUser()["role"].includes("MANAGER") === true &&
                     <div className="col-sm-12 col-md-12">
                         <a href={"/projects/add"} className={"btn btn-outline-primary btn-block"}>Add New</a>
                     </div>
@@ -82,4 +86,4 @@ const ProjectsList = (props) => {
     }
 }
 
-export default ProjectsList
+export default TasksList

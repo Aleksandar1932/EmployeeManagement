@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface ProjectService {
     List<Project> findAll();
 
+    List<Project> findAllByAssignedWorkerUsername(String username);
+
     Optional<Project> save(String name,
                            String description,
                            String location,

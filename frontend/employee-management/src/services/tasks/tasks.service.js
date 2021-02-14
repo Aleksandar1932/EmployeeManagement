@@ -12,8 +12,20 @@ const getTasks = (username) => {
     }
 }
 
-const deleteTaskById = (id) => {
+const addTask = (projectId, description, createdByUsername) => {
+    axios.post(TASKS_URL + "/add", {
+        "projectId" : projectId,
+        "description" : description,
+        "createdByUsername" : createdByUsername
+    })
+}
 
+const deleteTaskById = (taskId) => {
+    axios.delete(TASKS_URL + "/delete/" + taskId).then(r => console.log("Delete"));
+}
+
+const completeTask = (taskId, workerUsername) => {
+    axios.get(TASKS_URL + "/complete/" + taskId + "/" + workerUsername).then(r => console.log("Done"));
 }
 
 // const deleteProjectById = (id) => {
@@ -46,5 +58,8 @@ const deleteTaskById = (id) => {
 // }
 
 export default {
-    getTasks
+    getTasks,
+    deleteTaskById,
+    completeTask,
+    addTask
 }

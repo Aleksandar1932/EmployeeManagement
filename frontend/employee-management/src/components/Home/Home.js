@@ -1,11 +1,7 @@
 import React from "react";
 
-import ProjectsService from '../../services/projects/projects.service'
-
 
 const Home = () => {
-
-    ProjectsService.getProjects()
     return (
         <div className="container">
             <header className="jumbotron">

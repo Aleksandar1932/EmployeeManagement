@@ -44,7 +44,7 @@ const TasksList = (props) => {
 
         return tasks.length !== 0 ? (
             <div className={"container mm-4 mt-5"}>
-                <h3>All Tasks</h3>
+                {AuthService.isCurrentUserManager() === true ? <h3>All Tasks</h3> : <h3>Tasks on your projects</h3>}
                 <div className={"row"}>
                     <div className={"table-responsive"}>
                         <div className="col-sm-12 col-md-12">
@@ -71,9 +71,9 @@ const TasksList = (props) => {
                         </div>
                     </div>
 
-                    {AuthService.getCurrentUser()["role"].includes("MANAGER") === true &&
+                    {AuthService.isCurrentUserManager() === true &&
                     <div className="col-sm-12 col-md-12">
-                        <a href={"/projects/add"} className={"btn btn-outline-primary btn-block"}>Add New</a>
+                        <a href={"/tasks/add"} className={"btn btn-outline-primary btn-block"}>Add New</a>
                     </div>
                     }
 
@@ -81,7 +81,7 @@ const TasksList = (props) => {
                 </div>
             </div>
         ) : <div className="alert alert-warning" role="alert">
-            Currently there aren't any projects!
+            Currently there aren't any tasks!
         </div>
     }
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+import AuthService from "../../../services/authentication/auth.service";
+import TasksService from "../../../services/tasks/tasks.service";
 
 
 const TaskTerm = (props) => {
@@ -9,6 +11,12 @@ const TaskTerm = (props) => {
         // ProjectsService.deleteProjectById(id).then(r => {
         //     console.log(r.status)
         // });
+        TasksService.deleteTaskById(id)
+    }
+
+    const handleDone = (id) => {
+        console.log("Try to done: " + id)
+        TasksService.completeTask(id, AuthService.getCurrentUser()["username"])
     }
 
 
@@ -24,9 +32,16 @@ const TaskTerm = (props) => {
             }
             </td>
             <td scope={"col"}>
-                <a className={"btn btn-danger btn-sm ml-1 mr-1"} onClick={() => {
-                    handleDelete(props.term.id)
-                }}> Delete</a>
+                {AuthService.isCurrentUserManager() === true ?
+                    <a className={"btn btn-danger btn-sm ml-1 mr-1"} onClick={() => {handleDelete(props.term.id)}}> Delete</a>
+                    : !props.term.isCompleted ?
+                    <a className={"btn btn-success btn-sm ml-1 mr-1"} onClick={() => {handleDone(props.term.id)}}> Done</a>
+                   : <span className="badge badge-primary">Task is done</span>
+
+
+                }
+
+
             </td>
         </tr>
 

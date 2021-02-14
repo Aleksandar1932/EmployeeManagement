@@ -16,4 +16,8 @@ public interface TaskService {
     List<Task> findAllByProject(Long projectId);
 
     List<Task> findAllByAssignedWorkerUsername(String username);
+
+    Optional<Task> findById(Long id);
+
+    void deleteById(Long id);
 }

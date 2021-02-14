@@ -2,14 +2,14 @@ import React from "react";
 import AuthService from '../../../services/authentication/auth.service';
 
 
-const Profile = () => {
+const Account = () => {
     const currentUser = AuthService.getCurrentUser();
 
     return (
         <div className="container">
             <header className="jumbotron text-center">
                 <h3>
-                   Your Profile
+                   Your Account
                 </h3>
             </header>
             {/*<p>*/}
@@ -57,4 +57,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default Account;

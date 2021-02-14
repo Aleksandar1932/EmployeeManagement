@@ -19,6 +19,11 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
 
+    @Override
+    public List<Project> findAllByAssignedWorkerUsername(String username) {
+        return this.projectRepository.findAllByWorkersUsername(username);
+    }
+
     public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository) {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;

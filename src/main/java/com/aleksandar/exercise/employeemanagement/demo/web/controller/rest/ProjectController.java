@@ -22,9 +22,13 @@ public class ProjectController {
     }
 
     @GetMapping
-    public List<Project> findAll() {
+    public List<Project> findAll(@RequestParam(required = false) String username) {
+        if(username!=null){
+            return this.projectService.findAllByAssignedWorkerUsername(username);
+        }
         return this.projectService.findAll();
     }
+
 
     @PostMapping("/add")
     public ResponseEntity<Project> save(@RequestBody ProjectDto projectDto) {

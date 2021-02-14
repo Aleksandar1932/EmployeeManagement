@@ -3,8 +3,14 @@ import BACKEND_APP_URL from "../../constants/constants";
 
 const PROJECTS_URL = BACKEND_APP_URL + 'api/projects'
 
-const getProjects = () => {
-    return axios.get(PROJECTS_URL)
+const getProjects = (username) => {
+    if(username === undefined){
+     return axios.get(PROJECTS_URL)
+    }
+    else{
+        return axios.get(PROJECTS_URL + "?username="+username)
+    }
+
 }
 
 const deleteProjectById = (id) => {

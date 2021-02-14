@@ -7,25 +7,51 @@ const Profile = () => {
 
     return (
         <div className="container">
-            <header className="jumbotron">
+            <header className="jumbotron text-center">
                 <h3>
-                    <strong>{currentUser.username}</strong> Profile
+                   Your Profile
                 </h3>
             </header>
-            <p>
-                <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
-                {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-            </p>
-            <p>
-                <strong>Id:</strong> {currentUser.id}
-            </p>
-            <p>
-                <strong>Email:</strong> {currentUser.email}
-            </p>
+            {/*<p>*/}
+            {/*    <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}*/}
+            {/*    {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}*/}
+            {/*</p>*/}
+            {/*<p>*/}
+            {/*    <strong>Id:</strong> {currentUser.id}*/}
+            {/*</p>*/}
+            {/*<p>*/}
+            {/*    <strong>Email:</strong> {currentUser.email}*/}
+            {/*</p>*/}
+            <strong>Username:</strong>
+            <ul>
+                <li>{currentUser.username}</li>
+            </ul>
             <strong>Authorities:</strong>
             <ul>
-                {currentUser.roles &&
-                currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
+                {currentUser.authorities &&
+                currentUser.authorities.map((role, index) => <li key={index}>{role.replace("ROLE_","")}</li>)}
+            </ul>
+            <strong>Account Details:</strong>
+            <ul>
+                <li>
+                Account non-expired:  {currentUser.accountNonExpired ? <span className="badge badge-success">True</span> :
+                    <span className="badge badge-danger">False</span>}
+                </li>
+
+                <li>
+                    Account non-locked:  {currentUser.accountNonLocked ? <span className="badge badge-success">True</span> :
+                    <span className="badge badge-danger">False</span>}
+                </li>
+
+                <li>
+                    Credentials non-expired:  {currentUser.credentialsNonExpired ? <span className="badge badge-success">True</span> :
+                    <span className="badge badge-danger">False</span>}
+                </li>
+
+                <li>
+                    Account enabled:  {currentUser.enabled ? <span className="badge badge-success">True</span> :
+                    <span className="badge badge-danger">False</span>}
+                </li>
             </ul>
         </div>
     );

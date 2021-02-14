@@ -22,7 +22,12 @@ const ProjectsList = (props) => {
                 setProjects(response.data);
             })
         } else {
-            setForbidden(true);
+            ProjectsService.getProjects(AuthService.getCurrentUser()["username"]).then((response) => {
+                if (response.status === 403) {
+                    setForbidden(true)
+                }
+                setProjects(response.data);
+            })
         }
     }
 
@@ -37,7 +42,7 @@ const ProjectsList = (props) => {
 
         return projects.length !== 0 ? (
             <div className={"container mm-4 mt-5"}>
-                <h3>All Projects</h3>
+                {AuthService.isCurrentUserManager() === true ? <h3>All Projects</h3> : <h3>Projects on which you are assigned</h3>}
                 <div className={"row"}>
                     <div className={"table-responsive"}>
                         <div className="col-sm-12 col-md-12">
@@ -49,8 +54,8 @@ const ProjectsList = (props) => {
                                 <th scope={"col"}>Manager</th>
                                 <th scope={"col"}>Category</th>
                                 <th scope={"col"}>Budget</th>
-                                <th scope={"col"}>Workers</th>
-                                <th scope={"col"}>Actions</th>
+                                {AuthService.isCurrentUserManager() === true && <th scope={"col"}>Workers</th>}
+                                {AuthService.isCurrentUserManager() === true && <th scope={"col"}>Actions</th>}
                                 </thead>
 
                                 <tbody>

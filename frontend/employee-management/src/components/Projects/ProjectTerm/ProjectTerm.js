@@ -2,6 +2,7 @@ import React from 'react';
 import ProjectsService from "../../../services/projects/projects.service";
 import {Button, Modal} from "react-bootstrap";
 import AssignWorker from "./AssignWorker/AssignWorker";
+import AuthService from "../../../services/authentication/auth.service";
 
 
 const ProjectTerm = (props) => {
@@ -72,21 +73,21 @@ const ProjectTerm = (props) => {
                 <td scope={"col"}>{props.term.manager.username}</td>
                 <td scope={"col"}>{props.term.category}</td>
                 <td scope={"col"}>{props.term.budget}</td>
-                <td scope={"col"}>
+                {AuthService.isCurrentUserManager() === true && <td scope={"col"}>
 
 
                     {/*<a className={"btn btn-success btn-sm"}> View All</a>*/}
                     <Button className={"ml-2 btn-sm"} variant="success" onClick={openModal}>
                         View All <span className="ml-1 badge badge-light">{props.term.workers.length}</span>
                     </Button>
-                </td>
-                <td scope={"col"}>
+                </td>}
+                {AuthService.isCurrentUserManager() === true && <td scope={"col"}>
                     <a className={"btn btn-warning btn-sm ml-1 mr-1"}> Edit</a>
 
                     <a className={"btn btn-danger btn-sm ml-1 mr-1"} onClick={() => {
                         handleDelete(props.term.id)
                     }}> Delete</a>
-                </td>
+                </td>}
 
 
             </tr>

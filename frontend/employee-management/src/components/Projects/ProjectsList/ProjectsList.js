@@ -2,6 +2,7 @@ import ProjectTerm from "../ProjectTerm/ProjectTerm";
 import React, {useEffect, useState} from "react";
 import ProjectsService from "../../../services/projects/projects.service";
 import AuthService from "../../../services/authentication/auth.service";
+import ForbiddenAccess from "../../ForbiddenAccess/ForbiddenAccess";
 
 
 const ProjectsList = (props) => {
@@ -14,35 +15,38 @@ const ProjectsList = (props) => {
 
 
     const loadProjects = () => {
-        if (AuthService.isCurrentUserManager() === true) {
-            ProjectsService.getProjects().then((response) => {
-                if (response.status === 403) {
-                    setForbidden(true)
-                }
-                setProjects(response.data);
-            })
+        if (AuthService.getCurrentUser() === null) {
+            setForbidden(true)
         } else {
-            ProjectsService.getProjects(AuthService.getCurrentUser()["username"]).then((response) => {
-                if (response.status === 403) {
-                    setForbidden(true)
-                }
-                setProjects(response.data);
-            })
+            if (AuthService.isCurrentUserManager() === true) {
+                ProjectsService.getProjects().then((response) => {
+                    if (response.status === 403 || AuthService.getCurrentUser() === undefined) {
+                        setForbidden(true)
+                    }
+                    setProjects(response.data);
+                })
+            } else {
+                ProjectsService.getProjects(AuthService.getCurrentUser()["username"]).then((response) => {
+                    if (response.status === 403) {
+                        setForbidden(true)
+                    }
+                    setProjects(response.data);
+                })
+            }
         }
     }
 
     if (forbidden) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                Access not allowed!
-            </div>
-        )
+     return (
+         <ForbiddenAccess resourceName={"Projects"}/>
+     )
     } else {
 
 
         return projects.length !== 0 ? (
             <div className={"container mm-4 mt-5"}>
-                {AuthService.isCurrentUserManager() === true ? <h3>All Projects</h3> : <h3>Projects on which you are assigned</h3>}
+                {AuthService.isCurrentUserManager() === true ? <h3>All Projects</h3> :
+                    <h3>Projects on which you are assigned</h3>}
                 <div className={"row"}>
                     <div className={"table-responsive"}>
                         <div className="col-sm-12 col-md-12">

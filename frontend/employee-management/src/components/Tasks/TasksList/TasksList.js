@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import TasksService from "../../../services/tasks/tasks.service";
 import AuthService from "../../../services/authentication/auth.service";
 import TaskTerm from "../TaskTerm/TaskTerm";
+import ForbiddenAccess from "../../ForbiddenAccess/ForbiddenAccess";
 
 
 const TasksList = (props) => {
@@ -14,30 +15,31 @@ const TasksList = (props) => {
 
 
     const loadTasks = () => {
-        if (AuthService.isCurrentUserManager() === true) {
-            TasksService.getTasks().then((response) => {
-                if (response.status === 403) {
-                    setForbidden(true)
-                }
-                setTasks(response.data);
-            })
+        if (AuthService.getCurrentUser() === null) {
+            setForbidden(true)
         } else {
-            TasksService.getTasks(AuthService.getCurrentUser()["username"]).then((response) => {
-                if (response.status === 403) {
-                    setForbidden(true)
-                }
-                setTasks(response.data);
-            })
-            // setForbidden(true)
+            if (AuthService.isCurrentUserManager() === true) {
+                TasksService.getTasks().then((response) => {
+                    if (response.status === 403) {
+                        setForbidden(true)
+                    }
+                    setTasks(response.data);
+                })
+            } else {
+                TasksService.getTasks(AuthService.getCurrentUser()["username"]).then((response) => {
+                    if (response.status === 403) {
+                        setForbidden(true)
+                    }
+                    setTasks(response.data);
+                })
+                // setForbidden(true)
+            }
         }
-
     }
 
     if (forbidden) {
         return (
-            <div className="alert alert-danger" role="alert">
-                Access not allowed!
-            </div>
+            <ForbiddenAccess resourceName={"Tasks"}/>
         )
     } else {
 

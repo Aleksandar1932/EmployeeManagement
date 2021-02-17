@@ -5,6 +5,7 @@ import com.aleksandar.exercise.employeemanagement.demo.model.dto.ProjectDto;
 import com.aleksandar.exercise.employeemanagement.demo.model.enumerations.ProjectCategory;
 import com.aleksandar.exercise.employeemanagement.demo.service.ProjectService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -30,6 +31,7 @@ public class ProjectController {
     }
 
 
+    @Secured("ROLE_MANAGER")
     @PostMapping("/add")
     public ResponseEntity<Project> save(@RequestBody ProjectDto projectDto) {
         return this.projectService.save(projectDto)
@@ -37,18 +39,21 @@ public class ProjectController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    @Secured("ROLE_MANAGER")
     @GetMapping("/assign/{projectId}/{username}")
     public ResponseEntity<Project> assignWorkerOnProject(@PathVariable Long projectId, @PathVariable String username) {
         return this.projectService.assignWorkerOnProject(projectId, username).map(project -> ResponseEntity.ok().body(project))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    @Secured("ROLE_MANAGER")
     @GetMapping("/un-assign/{projectId}/{username}")
     public ResponseEntity<Project> unAssignWorkerOnProject(@PathVariable Long projectId, @PathVariable String username) {
         return this.projectService.unAssignWorkerOnProject(projectId, username).map(project -> ResponseEntity.ok().body(project))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    @Secured("ROLE_MANAGER")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteById(@PathVariable Long id) {
         this.projectService.deleteById(id);
@@ -56,6 +61,7 @@ public class ProjectController {
         return ResponseEntity.badRequest().build();
     }
 
+    @Secured("ROLE_MANAGER")
     @GetMapping("/categories")
     public List<String> findAllCategories() {
         return Arrays.stream(ProjectCategory.values())

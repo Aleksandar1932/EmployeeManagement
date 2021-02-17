@@ -14,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.aleksandar.exercise.employeemanagement.demo.config.SecurityConstants.SIGN_IN_URL;
 import static com.aleksandar.exercise.employeemanagement.demo.config.SecurityConstants.SIGN_UP_URL;
 
 @Configuration
@@ -32,14 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
                 .csrf().disable()
-
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/api/roles").permitAll()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-//                .antMatchers("/api/projects/**").hasRole("MANAGER")
-                .anyRequest().authenticated()
 
+                .antMatchers(SIGN_IN_URL).permitAll()
+                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))

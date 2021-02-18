@@ -27,7 +27,7 @@ const TaskTerm = (props) => {
             <td scope={"col"}>by {props.term.createdBy.username} @ {props.term.createdAt}</td>
             <td scope={"col"}>{
                 props.term.isCompleted ?
-                    <p>by {props.term.completedBy.username} @ {props.term.completedAt}}</p>
+                    <p>by {props.term.completedBy.username} @ {props.term.completedAt}</p>
                     : <p>Not Completed</p>
             }
             </td>

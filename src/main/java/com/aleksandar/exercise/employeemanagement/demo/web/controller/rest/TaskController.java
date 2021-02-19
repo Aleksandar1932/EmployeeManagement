@@ -48,7 +48,6 @@ public class TaskController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @Secured("ROLE_MANAGER")
     @GetMapping("/complete/{taskId}/{workerUsername}")
     public ResponseEntity<Task> completeTaskByWorker(@PathVariable Long taskId, @PathVariable String workerUsername) {
         return this.taskService.completeTask(taskId, workerUsername)

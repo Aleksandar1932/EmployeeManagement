@@ -20,4 +20,6 @@ public interface TaskService {
     Optional<Task> findById(Long id);
 
     void deleteById(Long id);
+
+    Long count();
 }

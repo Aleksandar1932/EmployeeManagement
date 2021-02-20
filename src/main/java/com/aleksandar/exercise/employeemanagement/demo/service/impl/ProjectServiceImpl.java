@@ -95,4 +95,9 @@ public class ProjectServiceImpl implements ProjectService {
     public void deleteById(Long id) {
         this.projectRepository.deleteById(id);
     }
+
+    @Override
+    public Long count() {
+        return this.projectRepository.count();
+    }
 }

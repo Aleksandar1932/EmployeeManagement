@@ -3,6 +3,7 @@ package com.aleksandar.exercise.employeemanagement.demo.web.controller.rest;
 import com.aleksandar.exercise.employeemanagement.demo.model.Task;
 import com.aleksandar.exercise.employeemanagement.demo.service.ProjectService;
 import com.aleksandar.exercise.employeemanagement.demo.service.TaskService;
+import com.aleksandar.exercise.employeemanagement.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
@@ -17,15 +18,28 @@ import java.util.stream.Collectors;
 public class StatisticsController {
     private final ProjectService projectService;
     private final TaskService taskService;
+    private final UserService userService;
 
-    public StatisticsController(ProjectService projectService, TaskService taskService) {
+    public StatisticsController(ProjectService projectService, TaskService taskService, UserService userService) {
         this.projectService = projectService;
         this.taskService = taskService;
+        this.userService = userService;
     }
 
     @GetMapping("/projects/total")
-    public Integer getTotalNumberOfProjects() {
-        return this.projectService.findAll().size();
+    public Long getTotalNumberOfProjects() {
+        return this.projectService.count();
+    }
+
+    @GetMapping("/tasks/total")
+    public Long getTotalNumberOfTasks() {
+        return this.taskService.count();
+    }
+
+
+    @GetMapping("/workers/total")
+    public Long getTotalNumberOfWorkers() {
+        return this.userService.getWorkersCount();
     }
 
     @GetMapping("/projects/total/by/manager/{managerUsername}")
@@ -52,11 +66,6 @@ public class StatisticsController {
                 .findAll()
                 .stream()
                 .collect(Collectors.groupingBy(p -> p.getCategory().toString(), Collectors.counting()));
-    }
-
-    @GetMapping("/tasks/total")
-    public Integer getTotalNumberOfTasks() {
-        return this.taskService.findAll().size();
     }
 
     @GetMapping("/tasks/count/completed/by/day")

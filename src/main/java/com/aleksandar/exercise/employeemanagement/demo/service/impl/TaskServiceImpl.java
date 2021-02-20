@@ -91,4 +91,9 @@ public class TaskServiceImpl implements TaskService {
     public void deleteById(Long id) {
         this.taskRepository.deleteById(id);
     }
+
+    @Override
+    public Long count() {
+        return this.taskRepository.count();
+    }
 }

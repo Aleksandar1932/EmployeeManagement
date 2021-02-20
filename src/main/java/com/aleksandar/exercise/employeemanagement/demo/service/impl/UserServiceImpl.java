@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return this.userRepository.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException(s));
     }
+
+    @Override
+    public Long getWorkersCount() {
+        return this.userRepository.countAllByRole(Role.ROLE_WORKER);
+    }
 }

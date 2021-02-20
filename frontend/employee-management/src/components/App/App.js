@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, Route, Switch} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import favicon from '../../favicon.ico'
 
 import AuthService from "../../services/authentication/auth.service"
 
@@ -64,6 +65,7 @@ const App = () => {
         <div>
             <Helmet>
                 <title>Employee Management</title>
+                <link rel="icon" type="image/png" href={favicon} />
             </Helmet>
             <nav className="navbar navbar-expand navbar-dark bg-dark">
                 <Link to={"/"} className="navbar-brand">

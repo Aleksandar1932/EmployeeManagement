@@ -27,4 +27,4 @@ The basic requirements are the following:
 
 - [x] `Workers` complete Tasks
 
-- [ ] `Managers` have dashboard
+- [x] `Managers` have dashboard

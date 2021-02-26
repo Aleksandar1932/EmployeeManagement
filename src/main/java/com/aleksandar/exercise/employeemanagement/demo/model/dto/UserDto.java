@@ -2,8 +2,10 @@ package com.aleksandar.exercise.employeemanagement.demo.model.dto;
 
 import com.aleksandar.exercise.employeemanagement.demo.model.enumerations.Role;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UserDto {
     private String username;
 

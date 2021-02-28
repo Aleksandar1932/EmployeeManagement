@@ -76,18 +76,23 @@ const ProjectsList = (props) => {
                         </div>
                     </div>
 
-                    {AuthService.isCurrentUserManager() === true &&
-                    <div className="col-sm-12 col-md-12">
-                        <a href={"/projects/add"} className={"btn btn-outline-primary btn-block"}>Add New</a>
-                    </div>
-                    }
 
 
                 </div>
             </div>
-        ) : <div className="alert alert-warning" role="alert">
-            Currently there aren't any projects!
-        </div>
+        ) :
+            <div>
+                <div className="alert alert-warning" role="alert">
+                    Currently there aren't any projects!
+                </div>
+                {AuthService.isCurrentUserManager() === true &&
+                <div className="col-sm-12 col-md-12">
+                    <a href={"/projects/add"} className={"btn btn-outline-primary btn-block"}>Add New</a>
+                </div>
+                }
+
+            </div>
+
     }
 }
 
